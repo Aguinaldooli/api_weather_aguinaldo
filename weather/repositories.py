@@ -9,24 +9,23 @@ class WeatherRepository:
         self.collection = collectionName
 
     def getConnection(self):
-        client = pymongo.MongoClient(getattr(settings, "MONGO_CONNECTION_STRING"))
-        connection = client[getattr(settings, "MONGO_DATABASE_NAME")]
+        client = pymongo.MongoClient(
+            getattr(settings, "MONGO_CONNECTION_STRING"))
+        connection = client[
+            getattr(settings, "MONGO_DATABASE_NAME")]
         return connection
     
-    def getCollection(self):
+    def getColletion(self):
         conn = self.getConnection()
         collection = conn[self.collection]
         return collection
     
     def getAll(self):
-        documents = list(self.getCollection().find({}))
-        return documents
+        document = self.getColletion().find({})
+        return document
     
     def insert(self, document):
-        self.getCollection().insert_one(document)
+        self.getColletion().insert_one(document)
 
-    def delete(self, document) -> None:
-        self.getCollection().delete_one({"_id": document["_id"]})
-        
-    def deleteAll(self) -> None:
-        self.getCollection().delete_many({})
+    def deleteAll(self):
+        self.getColletion().delete_many({})
