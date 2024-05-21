@@ -1,6 +1,6 @@
 from django.conf import settings
 import pymongo
-from weather.exception import WeatherException
+from weather.exceptions import WeatherException
 from pymongo.errors import ConnectionFailure
 from bson import ObjectId
 
